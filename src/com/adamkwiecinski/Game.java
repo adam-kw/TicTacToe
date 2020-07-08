@@ -111,6 +111,8 @@ public class Game {
         int xRow = 0;
         int oColumn = 0;
         int xColumn = 0;
+        char slantLeft = '?';
+        char slantRight = '!';
 
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -142,21 +144,28 @@ public class Game {
             xColumn = 0;
         }
 
-        if (gameTable[0][0] == 'O' || gameTable[0][0] == 'X' &&
-            gameTable[1][1] != 0 &&
-            gameTable[2][2] != 0 &&
-            gameTable[0][0] == gameTable[1][1] &&
-            gameTable[0][0] == gameTable[2][2]) {
-                System.out.println(gameTable[0][0] + " has won!");
+        if (gameTable[0][0] == 'O') {
+            slantLeft = 'O';
+        }
+        if(gameTable[0][0] == 'X'){
+            slantLeft = 'X';
+        }
+        if(gameTable[1][1] == slantLeft &&
+           gameTable[2][2] == slantLeft){
+                System.out.println(slantLeft + " has won!");
                 return true;
         }
 
-        if (gameTable[0][2] == 'O' || gameTable[0][2] == 'X' &&
-            gameTable[1][1] != 0 &&
-            gameTable[2][0] != 0 &&
-            gameTable[0][2] == gameTable[1][1] &&
-            gameTable[0][2] == gameTable[2][0]) {
-                System.out.println(gameTable[0][2] + " has won!");
+        if (gameTable[0][2] == 'O') {
+            slantRight = 'O';
+        }
+        if(gameTable[0][2] == 'X'){
+            slantRight = 'X';
+        }
+
+        if (gameTable[1][1] == slantRight &&
+            gameTable[2][0] == slantRight){
+                System.out.println(slantRight + " has won!");
                 return true;
         }
 
