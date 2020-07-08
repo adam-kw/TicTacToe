@@ -1,10 +1,7 @@
 package com.adamkwiecinski;
 
 public class Player {
-    char playerRole;
-
-    public Player() {
-    }
+    private char playerRole;
 
     public Player(char playerRole) {
         this.playerRole = playerRole;
