@@ -15,29 +15,33 @@ public class TicTacToeTest {
         String coordinates;
 
         System.out.println("Rules: \n" +
-                           "1) X starts the game \n" +
-                           "2) Coordinates allowed: 1-3 1-3 e.g. 1 1 or 2 1");
-        while (!finish) {
+                "1) X starts the game \n" +
+                "2) Coordinates allowed: 1-3 1-3 e.g. 1 1 or 2 1");
+
+        do {
             testGame.printGameTable(testGame.getBoard());
+            try {
+                if (queue % 2 > 0) {
+                    nextPlayer = playerX;
+                    System.out.println("X turn");
+                } else {
+                    nextPlayer = playerO;
+                    System.out.println("O turn");
+                }
 
-            System.out.print("Enter coordinates ");
-            coordinates = input.nextLine();
-            if(!testGame.isValidMove(coordinates, testGame.getBoard())){
-                continue;
-            }
+                System.out.print("Enter coordinates ");
+                coordinates = input.nextLine();
+                testGame.makeMove(coordinates, testGame.getBoard(), nextPlayer);
+                if (testGame.hasWon(testGame.getBoard())) {
+                    testGame.printGameTable(testGame.getBoard());
+                    finish = true;
+                }
+                queue++;
 
-            if (queue % 2 > 0) {
-                nextPlayer = playerX;
-            } else {
-                nextPlayer = playerO;
+            } catch (NumberFormatException e) {
+                System.out.println("You should enter numbers!");
+            } catch (IllegalArgumentException e) {
             }
-
-            testGame.makeMove(coordinates, testGame.getBoard(), nextPlayer);
-            if(testGame.hasWon(testGame.getBoard())){
-                testGame.printGameTable(testGame.getBoard());
-                finish = true;
-            }
-            queue++;
-        }
+        } while (!finish);
     }
 }

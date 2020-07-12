@@ -22,42 +22,24 @@ public class Game {
         System.out.println("---------");
     }
 
-    public boolean isValidMove(String coordinates, char[][] gameTable){
+    public char[][] makeMove(String coordinates, char[][] gameTable, Player player) {
         String[] array = coordinates.split(" ");
-
-        int x = 0;
-        int y = 0;
-
-        try {
-            x = Integer.parseInt(array[0]);
-            y = Integer.parseInt(array[1]);
-        } catch (Exception e) {
-            System.out.println("You should enter numbers!");
-            return false;
-        }
+        int x = Integer.parseInt(array[0]);
+        int y = Integer.parseInt(array[1]);
 
         if (x > 3 || x < 1 || y > 3 || y < 1) {
             System.out.println("Coordinates should be between 1 and 3");
-            return false;
-            //throw new IllegalArgumentException("Coordinates should be between 1 and 3");
+            throw new IllegalArgumentException();
         }
 
         for(int row = 0; row < 3; row++){
             for(int column = 0; column < 3; column++){
                 if(gameTable[x-1][y-1] == 'O' || gameTable[x-1][y-1] == 'X'){
                     System.out.println("This cell is occupied! Choose another one!");
-                    return false;
-                    //throw new IllegalArgumentException("This cell is occupied! Choose another one!");
+                    throw new IllegalArgumentException();
                 }
             }
         }
-        return true;
-    }
-
-    public char[][] makeMove(String coordinates, char[][] gameTable, Player player) {
-        String[] array = coordinates.split(" ");
-        int x = Integer.parseInt(array[0]);
-        int y = Integer.parseInt(array[1]);
 
         switch (x) {
             case 1:
