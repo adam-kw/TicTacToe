@@ -41,6 +41,7 @@ public class TicTacToeTest {
             } catch (NumberFormatException e) {
                 System.out.println("You should enter numbers!");
             } catch (IllegalArgumentException e) {
+
             }
         } while (!finish);
     }
